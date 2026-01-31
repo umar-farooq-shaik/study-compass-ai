@@ -1,0 +1,10 @@
+project_id = "yixwixtmrxccgvmiadsq"
+
+[functions.ai-counsellor]
+verify_jwt = false
+
+[functions.university-recommendations]
+verify_jwt = false
+
+[functions.generate-tasks]
+verify_jwt = false
