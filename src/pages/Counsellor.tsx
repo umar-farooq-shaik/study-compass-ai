@@ -88,7 +88,12 @@ export default function Counsellor() {
 
   return (
     <Layout isAuthenticated onLogout={handleLogout} currentStage={STAGE_LABELS[currentStage]} hideFooter>
-      <div className="flex h-[calc(100vh-64px)]">
+      <div
+        className="flex h-[calc(100vh-64px)]"
+        style={{
+          overflow: "hidden", // Add this to hide scrollbars
+        }}
+      >
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Chat Header */}
@@ -144,11 +149,13 @@ export default function Counsellor() {
                 </div>
 
                 <div className="w-full">
-                  <p className="text-sm font-medium text-muted-foreground mb-4 text-center">
-                    Quick start with these prompts:
-                  </p>
-                  <SuggestedPrompts onSelect={sendMessage} disabled={isLoading} />
-                </div>
+  <p className="text-sm font-medium text-muted-foreground mb-4 text-center">
+    Quick start with these prompts:
+  </p>
+  <div className="max-h-32 overflow-y-auto break-words whitespace-normal">
+    <SuggestedPrompts onSelect={sendMessage} disabled={isLoading} />
+  </div>
+</div>
               </div>
             ) : (
               <div className="max-w-3xl mx-auto space-y-4">

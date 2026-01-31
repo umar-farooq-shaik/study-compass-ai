@@ -125,13 +125,10 @@ export default function Auth() {
           return;
         }
 
-        const redirectUrl = `${window.location.origin}/`;
-
         const { data, error } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
           options: {
-            emailRedirectTo: redirectUrl,
             data: {
               full_name: formData.fullName,
             },
@@ -158,95 +155,33 @@ export default function Auth() {
           return;
         }
 
-        // If signup provided a session, the user is logged in (auto-confirm enabled)
+        // If signup provided a session, the user is logged in
         if (data.session) {
           toast({
             title: "Account created!",
             description: "Welcome to Study Compass AI.",
           });
-          // Navigation handled by auth state listener
           return;
         }
 
-        // If no session, try to sign in immediately (in case auto-confirm is enabled but session wasn't returned in signUp)
-        // or just to verify if we can proceed without email confirmation
+        // If no session, fallback to login
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
         });
-
         if (signInError) {
-          // Only show verification message if we absolutely have to (signin failed due to email not confirmed)
-          if (signInError.message.includes("Email not confirmed")) {
-            toast({
-              title: "Verification Required",
-              description: "Please check your email to verify your account.",
-            });
-          } else {
-            toast({
-              title: "Account created",
-              description: "Please sign in with your credentials.",
-            });
-            setMode("login");
-          }
+          toast({
+            title: "Signup Failed",
+            description: "Unable to log in after signup. Please try again.",
+            variant: "destructive",
+          });
         } else {
           toast({
             title: "Account created!",
             description: "Welcome to Study Compass AI.",
           });
-          // Navigation handled by auth state listener
         }
-      } else {
-        const result = loginSchema.safeParse(formData);
-        if (!result.success) {
-          const fieldErrors: Record<string, string> = {};
-          result.error.errors.forEach((err) => {
-            if (err.path[0]) {
-              fieldErrors[err.path[0] as string] = err.message;
-            }
-          });
-          setErrors(fieldErrors);
-          setIsLoading(false);
-          return;
-        }
-
-        const { error } = await supabase.auth.signInWithPassword({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (error) {
-          if (error.message.includes("Invalid login credentials")) {
-            setErrors({ password: "Invalid email or password" });
-          } else if (error.message.includes("Email not confirmed")) {
-            toast({
-              title: "Email not verified",
-              description: "Please check your email and click the confirmation link.",
-              variant: "destructive",
-            });
-          } else {
-            toast({
-              title: "Login Failed",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
-          setIsLoading(false);
-          return;
-        }
-
-        toast({
-          title: "Welcome back!",
-          description: "Successfully logged in.",
-        });
-        navigate("/dashboard");
       }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      });
     } finally {
       setIsLoading(false);
     }
