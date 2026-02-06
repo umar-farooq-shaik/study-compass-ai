@@ -132,6 +132,7 @@ export default function Auth() {
             data: {
               full_name: formData.fullName,
             },
+            emailRedirectTo: `${window.location.origin}/`,
           },
         });
 
@@ -181,7 +182,51 @@ export default function Auth() {
             description: "Welcome to Study Compass AI.",
           });
         }
+      } else {
+        // Login mode
+        const result = loginSchema.safeParse(formData);
+        if (!result.success) {
+          const fieldErrors: Record<string, string> = {};
+          result.error.errors.forEach((err) => {
+            if (err.path[0]) {
+              fieldErrors[err.path[0] as string] = err.message;
+            }
+          });
+          setErrors(fieldErrors);
+          setIsLoading(false);
+          return;
+        }
+
+        const { error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (error) {
+          if (error.message.includes("Invalid login credentials")) {
+            setErrors({ email: "Invalid email or password. Please try again." });
+          } else {
+            toast({
+              title: "Login Failed",
+              description: error.message,
+              variant: "destructive",
+            });
+          }
+          setIsLoading(false);
+          return;
+        }
+
+        toast({
+          title: "Welcome back!",
+          description: "You have successfully signed in.",
+        });
       }
+    } catch (err) {
+      toast({
+        title: "Error",
+        description: err instanceof Error ? err.message : "An unexpected error occurred",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
