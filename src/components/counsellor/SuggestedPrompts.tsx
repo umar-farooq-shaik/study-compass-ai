@@ -53,13 +53,13 @@ export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) 
         <Button
           key={prompt.label}
           variant="outline"
-          className="h-auto min-h-[88px] p-4 flex flex-col items-start gap-2 text-left hover:border-primary/50 hover:bg-primary/5 transition-all justify-start overflow-hidden"
+          className="h-auto min-h-[88px] p-4 flex flex-col items-start gap-2 text-left hover:border-primary/50 hover:bg-primary/5 transition-all justify-start overflow-hidden hover:text-foreground"
           onClick={() => onSelect(prompt.prompt)}
           disabled={disabled}
         >
           <div className="flex items-center gap-2 flex-shrink-0 w-full">
             <prompt.icon className="h-4 w-4 text-primary flex-shrink-0" />
-            <span className="font-medium text-sm truncate">{prompt.label}</span>
+            <span className="font-medium text-sm truncate text-foreground">{prompt.label}</span>
           </div>
           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed w-full overflow-hidden text-ellipsis">
             {prompt.prompt}
