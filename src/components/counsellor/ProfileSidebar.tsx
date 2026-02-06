@@ -77,8 +77,8 @@ export function ProfileSidebar({ profile }: ProfileSidebarProps) {
   )?.label || profile?.intended_degree;
 
   return (
-    <div className="w-80 flex-shrink-0 border-l border-border bg-muted/20 p-4 overflow-y-auto">
-      <div className="space-y-4">
+    <div className="w-80 flex-shrink-0 border-l border-border bg-muted/20 p-4 h-full overflow-hidden">
+      <div className="h-full overflow-y-auto scrollbar-hide space-y-4">
         {/* Profile Strength */}
         <Card className="p-4">
           <div className="flex items-center justify-between mb-3">
