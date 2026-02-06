@@ -132,7 +132,7 @@ export default function Counsellor() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+          <div className="flex-1 overflow-y-auto scrollbar-hide px-4 py-6 sm:px-6">
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center max-w-3xl mx-auto px-2">
                 <div className="text-center mb-8">
