@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { ProfileSection } from "@/components/profile/ProfileSection";
 import { ProfileStrengthCard } from "@/components/profile/ProfileStrengthCard";
 import { AcademicBackgroundStep } from "@/components/onboarding/steps/AcademicBackgroundStep";
