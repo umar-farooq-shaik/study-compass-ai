@@ -48,20 +48,20 @@ const PROMPTS = [
 
 export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {PROMPTS.map((prompt) => (
         <Button
           key={prompt.label}
           variant="outline"
-          className="h-auto p-4 flex flex-col items-start gap-2 text-left hover:border-primary/50 hover:bg-primary/5 transition-all"
+          className="h-auto min-h-[88px] p-4 flex flex-col items-start gap-2 text-left hover:border-primary/50 hover:bg-primary/5 transition-all justify-start"
           onClick={() => onSelect(prompt.prompt)}
           disabled={disabled}
         >
-          <div className="flex items-center gap-2">
-            <prompt.icon className="h-4 w-4 text-primary" />
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <prompt.icon className="h-4 w-4 text-primary flex-shrink-0" />
             <span className="font-medium text-sm">{prompt.label}</span>
           </div>
-          <p className="text-xs text-muted-foreground line-clamp-2">
+          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
             {prompt.prompt}
           </p>
         </Button>

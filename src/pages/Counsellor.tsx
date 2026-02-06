@@ -132,9 +132,9 @@ export default function Counsellor() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             {messages.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center max-w-3xl mx-auto">
+              <div className="h-full flex flex-col items-center justify-center max-w-3xl mx-auto px-2">
                 <div className="text-center mb-8">
                   <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mx-auto mb-4">
                     <Bot className="h-8 w-8 text-secondary" />
@@ -142,20 +142,18 @@ export default function Counsellor() {
                   <h2 className="font-display text-2xl font-bold mb-2">
                     Hi! I'm your AI Counsellor
                   </h2>
-                  <p className="text-muted-foreground max-w-md">
+                  <p className="text-muted-foreground max-w-md mx-auto">
                     I have access to your complete profile and can provide personalized guidance
                     for your study-abroad journey. Ask me anything!
                   </p>
                 </div>
 
-                <div className="w-full">
-  <p className="text-sm font-medium text-muted-foreground mb-4 text-center">
-    Quick start with these prompts:
-  </p>
-  <div className="max-h-32 overflow-y-auto break-words whitespace-normal">
-    <SuggestedPrompts onSelect={sendMessage} disabled={isLoading} />
-  </div>
-</div>
+                <div className="w-full max-w-3xl">
+                  <p className="text-sm font-medium text-muted-foreground mb-4 text-center">
+                    Quick start with these prompts:
+                  </p>
+                  <SuggestedPrompts onSelect={sendMessage} disabled={isLoading} />
+                </div>
               </div>
             ) : (
               <div className="max-w-3xl mx-auto space-y-4">
