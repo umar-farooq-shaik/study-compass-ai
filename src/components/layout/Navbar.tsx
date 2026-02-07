@@ -17,13 +17,13 @@ export function Navbar({ isAuthenticated = false, currentStage, onLogout }: Navb
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container flex h-16 items-center justify-between">
+      <nav className="container flex h-14 md:h-16 items-center justify-between px-4 md:px-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <GraduationCap className="h-5 w-5 text-primary-foreground" />
+        <Link to="/" className="flex items-center gap-1.5 md:gap-2 transition-opacity hover:opacity-80">
+          <div className="flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-lg bg-primary">
+            <GraduationCap className="h-4 w-4 md:h-5 md:w-5 text-primary-foreground" />
           </div>
-          <span className="font-display text-xl font-bold text-foreground">
+          <span className="font-display text-base md:text-xl font-bold text-foreground">
             AI Counsellor
           </span>
         </Link>
