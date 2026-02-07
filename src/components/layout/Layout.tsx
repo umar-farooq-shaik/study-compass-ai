@@ -17,13 +17,13 @@ export function Layout({
   hideFooter = false,
 }: LayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden">
       <Navbar
         isAuthenticated={isAuthenticated}
         currentStage={currentStage}
         onLogout={onLogout}
       />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
       {!hideFooter && <Footer />}
     </div>
   );
