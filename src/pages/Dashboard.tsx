@@ -112,7 +112,7 @@ export default function Dashboard() {
     return "locked";
   };
   return <Layout isAuthenticated onLogout={handleLogout} currentStage={stageConfig.label}>
-      <div className="container py-8 lg:py-12 pb-[640px]">
+      <div className="container px-4 md:px-6 py-8 lg:py-12 pb-[640px] max-w-full overflow-x-hidden">
         {/* Welcome Header */}
         <div className="mb-8">
           <h1 className="font-display text-3xl font-bold mb-2">
